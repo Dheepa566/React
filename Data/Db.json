@@ -1,0 +1,34 @@
+{
+    "arr": [{
+            "id": "1",
+            "topic": "Java",
+            "status": true
+        },
+        {
+            "id": "2",
+            "topic": "Mysql",
+            "status": false
+        },
+        {
+            "id": "3",
+            "topic": "Angular",
+            "status": false
+        },
+        {
+            "id": "4",
+            "topic": "Python",
+            "status": true
+        },
+        {
+            "id": "p3TWlFBWCiQ",
+            "topic": "hi",
+            "status": false
+        },
+        {
+            "id": "lX-96mKmOJQ",
+            "topic": "hi",
+            "status": false
+        }
+    ],
+    "$schema": "./node_modules/json-server/schema.json"
+}
