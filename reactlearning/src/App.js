@@ -6,11 +6,13 @@ import Nav from './Nav';
 import ToDoList from './ToDoList';
 import AddPost from './AddPost';
 import axios from 'axios';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 function App() {
   //let num=0;
   let[num,setNum]= useState(0);
   let [topic,setTopic]=useState("");
+  //let navigate=useNavigate();
   let url="http://localhost:4100/arr";
 
   function increment(){
@@ -34,6 +36,9 @@ function App() {
         {
             let list=data.map((obj1)=>obj1.id==id ?{...obj1,status:!obj1.status} : obj1)
             setData(list);
+            let updatedData=list.find((obj1)=>obj1.id==id);
+            let updateUrl=`${url}/${id}`;
+            axios.put(updateUrl,updatedData);
         }
     
         function handleDelete(id)
@@ -62,6 +67,7 @@ function App() {
    apiRequest(url,option);*/
     //console.log(id);
     axios.post(url,obj);
+    //navigate("/");
   }
   let heading = "react";
   function add()
@@ -100,9 +106,24 @@ function App() {
      <button onClick={add}>click me once</button>
      <button onDoubleClick={()=>sub(10,8)}>click me twice</button>
      <Nav/>
-     <Counter num={num} increment={increment} decrement={decrement}/>
-     <AddPost topic={topic} handleSubmit={handleSubmit} setTopic={setTopic}/>
-     <ToDoList data={data} handleChange={handleChange} handleDelete={handleDelete}/>
+     <Routes>
+      <Route path="/" 
+             element={
+                <ToDoList 
+                    data={data} 
+                    handleChange={handleChange} 
+                    handleDelete={handleDelete}/>} />
+      <Route path="/counter"
+             element={<Counter 
+                     num={num} 
+                     increment={increment} 
+                     decrement={decrement}/>} />
+      <Route path="/addpost"
+              element={<AddPost 
+                      topic={topic} 
+                      handleSubmit={handleSubmit} 
+                      setTopic={setTopic}/>} />
+     </Routes>
      
     </div>
     // <div></div> --> X X X X only one main tag should be there
